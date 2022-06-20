@@ -8,7 +8,7 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
   const documentId = (req.query.documentId || (req.body && req.body.documentId)) as string | undefined;
   const userId = (req.query.userId || (req.body && req.body.userId)) as string;
   const userName = (req.query.userName || (req.body && req.body.userName)) as string;
-  const scopes = [process.env.SCOPES] as ScopeType[]; // "doc:read", "doc:write", "summary:write"
+  const scopes = [ScopeType.DocRead, ScopeType.DocWrite, ScopeType.SummaryWrite]; // [process.env.SCOPES] as ScopeType[]; // "doc:read", "doc:write", "summary:write"
 
   if (!tenantId) {
     context.res = {
